@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brevilo</title>
+
+    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            width: 100%;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .tagline {
+            text-align: center;
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        textarea {
+            width: 100%;
+            height: 150px;
+            padding: 10px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            resize: none;
+            font-size: 16px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        h3 {
+            color: #333;
+            font-size: 18px;
+            margin-top: 20px;
+        }
+
+        p {
+            background-color: #f9f9f9;
+            padding: 10px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            font-size: 16px;
+        }
+
+        #summaryOutput {
+            min-height: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Brevilo</h1>
+        <p class="tagline">Powered by Groq Cloud API</p>
+
+        <textarea id="inputText" placeholder="Paste your text here..."></textarea>
+        <br>
+
+        <button onclick="getSummary()">Summarize</button>
+
+        <h3>Summary:</h3>
+        <p id="summaryOutput">The summarized text will appear here.</p>
+    </div>
+
+    <script>
+        function getSummary() {
+            const text = document.getElementById('inputText').value;
+
+            // Check if the input is empty before making the request
+            if (!text.trim()) {
+                document.getElementById('summaryOutput').innerText = "Please enter some text to summarize.";
+                return;
+            }
+
+            console.log("Sending text for summarization:", text);
+
+            // Send the request to backend
+            fetch('/summarize', {  // This will work since both front and back are on the same domain
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ text: text })
+})
+
+            .then(response => {
+                if (!response.ok) {
+                    // If the response is not okay, throw an error
+                    throw new Error("Network response was not ok");
+                }
+                return response.json();
+            })
+            .then(data => {
+                // Display the summarized text in the summaryOutput paragraph
+                document.getElementById('summaryOutput').innerText = data.summary;
+            })
+            .catch(error => {
+                // If there's any error, log it and display an error message
+                console.error("Error summarizing text:", error);
+                document.getElementById('summaryOutput').innerText = "Error summarizing text. Please try again.";
+            });
+        }
+    </script>
+</body>
+</html>

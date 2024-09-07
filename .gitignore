@@ -1,0 +1,84 @@
+# Virtual environment
+venv/
+env/
+.venv/
+.venv.bak/
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# macOS specific files
+.DS_Store
+
+# Vercel specific files
+.vercel/
+.vscode/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints
+
+# PyCharm specific files
+.idea/
+*.iml
+
+# Coverage reports
+htmlcov/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+
+# PyInstaller
+#  Usually these files are written by a Python script from a template
+#  before PyInstaller builds the binary.
+*.manifest
+*.spec
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Logs and databases
+*.log
+*.sql
+*.sqlite3
+
+# Unit test / coverage reports
+.tox/
+.nox/
+.pytest_cache/
+test-results/
+junit.xml
+.testmondata
+
+# Editor settings and temporary files
+*.swp
+*~
+.idea/
+.vscode/
+
+# Ignore environments and node_modules (for vercel)
+node_modules/
+.vercel
